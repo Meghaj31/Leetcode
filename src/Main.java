@@ -1,6 +1,4 @@
-package dp;
-
-public class house_robber {
+public class Main {
     public static void main(String[] args) {
 
     }
