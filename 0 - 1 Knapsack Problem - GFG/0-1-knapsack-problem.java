@@ -53,8 +53,19 @@ class Solution
     { 
          // your code here 
          int[][] dp=new int[n][W+1];
-         for(int[] num:dp) Arrays.fill(num,-1);
-         return helper(n-1,W,wt,val,dp);
+        //  for(int[] num:dp) Arrays.fill(num,-1);
+        //  return helper(n-1,W,wt,val,dp);
+        for(int i=wt[0];i<W+1;i++) dp[0][i]=val[0];
+        
+        for(int ind=1;ind<n;ind++){
+            for(int w=0;w<W+1;w++){
+                int take=0;
+                if(wt[ind]<=w) take=dp[ind-1][w-wt[ind]]+val[ind];
+                int notake=dp[ind-1][w];
+                dp[ind][w] = Math.max(take,notake);
+            }
+        }
+        return dp[n-1][W];
     } 
     private static int helper(int ind,int w,int[] wt,int[] val,int[][] dp){
         if(w==0) return 0;
